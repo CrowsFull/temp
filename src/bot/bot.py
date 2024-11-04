@@ -41,7 +41,7 @@ class Bot:
 
         # self.application: Application = Application.builder().token(token).connect_timeout(30).persistence(
         # persistence=self.persistence).build()
-        # self.__include_jobs()
+        self.__include_jobs()
         self.__include_handlers()
 
     def __init__(self) -> None:

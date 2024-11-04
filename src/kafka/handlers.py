@@ -7,6 +7,7 @@ from telegram import Bot
 
 from src.bot.handlers.consts.consts import BASE_PARSE_MODE
 from src.config.api import api_config
+from src.config.config import BASE_CHEQUE_CHAT_ID, BASE_CHEQUE_THREAD_ID, BASE_TRONSCAN_TRANSACTION_LINK
 from src.kafka.utils.enums import Status
 
 
@@ -32,15 +33,21 @@ async def send_status_message(bot: Bot, payload: dict) -> bool:
                         project_name = project.get("name")
                         partner_id = project.get("partnerId")
 
+                        # QUERY TO FIND CHAT
+
                         # todo: get partner info
-                        partner_chat_id = -4504066274
+                        partner_chat_id = BASE_CHEQUE_CHAT_ID
+                        thread_id = BASE_CHEQUE_THREAD_ID
+
+                        link = f"{BASE_TRONSCAN_TRANSACTION_LINK}{transfer_hash}" if transfer_hash is not None else '-'
 
                         await bot.send_message(
                             chat_id=partner_chat_id,
+                            message_thread_id=thread_id,
                             text="<b>Cheque information</b>🧾\n\n"
                                  f"<b>Project</b>: {project_name}\n"
                                  f"<b>Amount</b>: {f'{payment_amount:,}'} $\n"
-                                 f"<b>Link</b>: {transfer_hash if transfer_hash is not None else '-'}",
+                                 f"<b>Link</b>:\n{link}",
                             parse_mode=BASE_PARSE_MODE
                         )
                     else:

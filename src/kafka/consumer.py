@@ -1,3 +1,4 @@
+import asyncio
 import json
 import logging
 from typing import List
@@ -59,6 +60,7 @@ class KafkaConsumerManager:
 
                     if tpe == NotificationType.PAYMENT_STATUS_CHANGED:
                         await send_status_message(bot, payload)
+                        await asyncio.sleep(2)
             except json.JSONDecodeError:
                 logging.error("Error decoding JSON message")
 
