@@ -5,10 +5,10 @@ from typing import List
 import aiohttp
 from telegram import Bot
 
-from src.bot.handlers.consts.consts import BASE_PARSE_MODE
-from src.config.api import api_config
-from src.config.config import BASE_CHEQUE_CHAT_ID, BASE_CHEQUE_THREAD_ID, BASE_TRONSCAN_TRANSACTION_LINK
-from src.kafka.utils.enums import Status
+from bot.handlers.consts.consts import BASE_PARSE_MODE
+from config.api import api_config
+from config.config import BASE_CHEQUE_CHAT_ID, BASE_CHEQUE_THREAD_ID, BASE_TRONSCAN_TRANSACTION_LINK
+from kafka.utils.enums import Status
 
 
 async def send_status_message(bot: Bot, payload: dict) -> bool:

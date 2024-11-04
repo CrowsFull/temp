@@ -2,7 +2,7 @@ import logging
 
 import telegram.ext
 
-from src.kafka.consumer import kafka_consumer_manager
+from kafka.consumer import kafka_consumer_manager
 
 
 async def handle_message_queue(context: telegram.ext.CallbackContext):

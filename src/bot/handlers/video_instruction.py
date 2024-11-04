@@ -2,7 +2,7 @@ from telegram import Update
 from telegram.constants import ChatType
 from telegram.ext import ConversationHandler, CallbackQueryHandler, CommandHandler, ContextTypes
 
-from src.bot.handlers.consts.consts import BASE_PARSE_MODE
+from bot.handlers.consts.consts import BASE_PARSE_MODE
 from src.bot.handlers.entrypoint import entrypoint_start_handler
 
 
