@@ -1,4 +1,5 @@
 import logging
+import uuid
 
 from telegram import Update
 from telegram.constants import ChatType
@@ -11,6 +12,7 @@ from bot.handlers.consts.messages import ACTIVATE_MESSAGE, REGISTRATION_MESSAGE,
 from bot.handlers.entrypoint import entrypoint_start_handler
 from bot.handlers.technical_support.base import technical_support_start_handler, technical_support_handler
 from bot.handlers.utils.keyboards import activate_keyboard, first_menu_keyboard, first_menu_reply_keyboard
+from utils.chats import create_group_chat
 
 logger = logging.getLogger(__name__)
 
@@ -23,7 +25,11 @@ MAIN_MENU = 4
 async def registration_start_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat = update.effective_chat
 
-    # todo: chat create logic
+    hash = str(uuid.uuid4())
+    users = [chat.id]
+    bots = [context.bot]
+
+    await create_group_chat(hash, users, bots)
 
     if chat.type == ChatType.PRIVATE:
         await context.bot.send_message(
