@@ -24,7 +24,7 @@ class Bot:
     def __include_jobs(self) -> None:
         moscow_tz = pytz.timezone('Europe/Moscow')
 
-        self.job_queue.run_once(handle_message_queue, 1)
+        self.job_queue.run_once(handle_message_queue, 5)
 
     def __create_persistence(self) -> None:
         self.persistence: PicklePersistence = PicklePersistence(filepath=self.persistence_file_path,
@@ -41,9 +41,8 @@ class Bot:
 
         # self.application: Application = Application.builder().token(token).connect_timeout(30).persistence(
         # persistence=self.persistence).build()
-        self.__include_jobs()
+        # self.__include_jobs()
         self.__include_handlers()
-
 
     def __init__(self) -> None:
         self.connect_timeout: int = 30

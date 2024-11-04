@@ -23,17 +23,14 @@ def delivery_report(err, msg):
 
 
 def send_random_status_update():
-    status = random.choice(["pending", "finished", "started"])
-
+    status = random.choice(["pending", "completed", "started"])
     message = {
-        "partner_chat_id": -4504066274,
-        "client_chat_id": -4518899699,
-        "project": "FB55.20",
-        "status": status,
-        "price": random.randint(-10000, 100000),
-        "link": "https://tronscan.org/#/transaction/01682e90a17f77aa953db240cb467c6f8df0f23222fd7165e6217b32639daf7b"
+        "tpe": "PaymentStatusChanged",
+        "payload": {
+            "paymentId": 1,
+            "status": "completed"
+        }
     }
-
     producer.produce(
         TOPIC_NAME,
         value=json.dumps(message).encode('utf-8'),
@@ -43,7 +40,17 @@ def send_random_status_update():
     producer.flush()
 
 
+""" message = {
+     "partner_chat_id": -4504066274,
+     "client_chat_id": -4518899699,
+     "project": "FB55.20",
+     "status": status,
+     "price": random.randint(-10000, 100000),
+     "link": "https://tronscan.org/#/transaction/01682e90a17f77aa953db240cb467c6f8df0f23222fd7165e6217b32639daf7b"
+ }
+ """
+
 if __name__ == "__main__":
     while True:
         send_random_status_update()
-        time.sleep(10)
+        time.sleep(7)

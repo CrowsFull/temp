@@ -15,5 +15,16 @@ class APIConfig(BaseSettings):
         env_file_encoding = 'utf-8'
         extra = "ignore"
 
+    @property
+    def api_url(self):
+        return f"http://{self.API_HOST}:{self.API_PORT}/api"
+
+    @property
+    def api_headers(self):
+        return {
+            "X-Api-Key": self.API_TOKEN,
+            "accept": "application/json"
+        }
+
 
 api_config = APIConfig()
