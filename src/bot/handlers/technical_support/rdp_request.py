@@ -1,15 +1,15 @@
 from telegram import Update
 from telegram.constants import ChatType
 from telegram.ext import MessageHandler, filters, ConversationHandler, ContextTypes, CommandHandler
-from src.bot.handlers.consts.consts import BASE_PARSE_MODE
-from src.bot.handlers.entrypoint import entrypoint_start_handler
-from src.bot.handlers.technical_support.account_problem import account_problem_request_handler
+from bot.handlers.consts.consts import BASE_PARSE_MODE
+from bot.handlers.entrypoint import entrypoint_start_handler
+from bot.handlers.technical_support.account_problem import account_problem_request_handler
 
-from src.bot.handlers.technical_support.checkpoint import checkpoint_request_handler
-from src.bot.handlers.technical_support.funpage import funpage_request_handler
-from src.bot.handlers.technical_support.pixel import pixel_request_handler
-from src.bot.handlers.technical_support.soc import soc_request_handler
-from src.bot.handlers.utils.keyboards import rdp_request_keyboard
+from bot.handlers.technical_support.checkpoint import checkpoint_request_handler
+from bot.handlers.technical_support.funpage import funpage_request_handler
+from bot.handlers.technical_support.pixel import pixel_request_handler
+from bot.handlers.technical_support.soc import soc_request_handler
+from bot.handlers.utils.keyboards import rdp_request_keyboard
 
 CHOOSE_ACTION = 1
 
@@ -29,7 +29,7 @@ async def rdp_request_start_handler(update: Update, context: ContextTypes.DEFAUL
 
 
 async def rdp_request_back_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    from src.bot.handlers.technical_support.base import technical_support_start_handler
+    from bot.handlers.technical_support.base import technical_support_start_handler
 
     await technical_support_start_handler(update, context)
     return ConversationHandler.END

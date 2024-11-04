@@ -3,12 +3,12 @@ from telegram.constants import ChatType
 from telegram.ext import ConversationHandler, CallbackQueryHandler, CommandHandler, ContextTypes, MessageHandler, \
     filters, BaseHandler
 
-from src.bot.handlers.consts.consts import BASE_PARSE_MODE
-from src.bot.handlers.entrypoint import entrypoint_start_handler
+from bot.handlers.consts.consts import BASE_PARSE_MODE
+from bot.handlers.entrypoint import entrypoint_start_handler
 
-from src.bot.handlers.technical_support.akk_request import akk_request_handler
-from src.bot.handlers.technical_support.rdp_request import rdp_request_handler
-from src.bot.handlers.utils.keyboards import technical_support_reply_keyboard, empty_reply_keyboard
+from bot.handlers.technical_support.akk_request import akk_request_handler
+from bot.handlers.technical_support.rdp_request import rdp_request_handler
+from bot.handlers.utils.keyboards import technical_support_reply_keyboard, empty_reply_keyboard
 
 CHOOSE_ACTION = 1
 
@@ -45,7 +45,7 @@ async def reference_information_handler(update: Update, context: ContextTypes.DE
 
 
 async def reference_information_back_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    from src.bot.handlers.registration import main_menu_handler
+    from bot.handlers.registration import main_menu_handler
 
     await main_menu_handler(update, context)
     return ConversationHandler.END

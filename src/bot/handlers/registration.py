@@ -5,12 +5,12 @@ from telegram.constants import ChatType
 from telegram.ext import ConversationHandler, CommandHandler, ContextTypes, CallbackQueryHandler, filters, \
     MessageHandler
 
-from src.bot.handlers.consts.consts import BASE_PARSE_MODE
-from src.bot.handlers.consts.messages import ACTIVATE_MESSAGE, REGISTRATION_MESSAGE, FIRST_MENU_MESSAGE, \
+from bot.handlers.consts.consts import BASE_PARSE_MODE
+from bot.handlers.consts.messages import ACTIVATE_MESSAGE, REGISTRATION_MESSAGE, FIRST_MENU_MESSAGE, \
     FIRST_MAIN_MENU_MESSAGE
-from src.bot.handlers.entrypoint import entrypoint_start_handler
-from src.bot.handlers.technical_support.base import technical_support_start_handler, technical_support_handler
-from src.bot.handlers.utils.keyboards import activate_keyboard, first_menu_keyboard, first_menu_reply_keyboard
+from bot.handlers.entrypoint import entrypoint_start_handler
+from bot.handlers.technical_support.base import technical_support_start_handler, technical_support_handler
+from bot.handlers.utils.keyboards import activate_keyboard, first_menu_keyboard, first_menu_reply_keyboard
 
 logger = logging.getLogger(__name__)
 

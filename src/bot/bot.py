@@ -3,9 +3,9 @@ import logging
 import pytz
 from telegram.ext import Application, PicklePersistence
 
-#from bot.handlers.entrypoint import entrypoint_handler
-#from bot.handlers.registration import registration_handler
-#from bot.handlers.video_instruction import video_instruction_handler
+from bot.handlers.entrypoint import entrypoint_handler
+from bot.handlers.registration import registration_handler
+from bot.handlers.video_instruction import video_instruction_handler
 from bot.jobs.cheques import handle_message_queue
 from config.bot import bot_config
 
@@ -42,7 +42,7 @@ class Bot:
         # self.application: Application = Application.builder().token(token).connect_timeout(30).persistence(
         # persistence=self.persistence).build()
         self.__include_jobs()
-        #self.__include_handlers()
+        self.__include_handlers()
 
     def __init__(self) -> None:
         self.connect_timeout: int = 30

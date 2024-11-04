@@ -1,6 +1,6 @@
 from telegram import InlineKeyboardMarkup, ReplyKeyboardMarkup, ReplyKeyboardRemove
 
-from src.bot.handlers.utils.buttons import *
+from bot.handlers.utils.buttons import *
 
 entrypoint_keyboard = InlineKeyboardMarkup([
     [registration_button]

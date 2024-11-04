@@ -3,7 +3,7 @@ from telegram.constants import ChatType
 from telegram.ext import ConversationHandler, CallbackQueryHandler, CommandHandler, ContextTypes
 
 from bot.handlers.consts.consts import BASE_PARSE_MODE
-from src.bot.handlers.entrypoint import entrypoint_start_handler
+from bot.handlers.entrypoint import entrypoint_start_handler
 
 
 async def video_instruction_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):

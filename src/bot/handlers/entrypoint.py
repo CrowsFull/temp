@@ -6,11 +6,11 @@ from telegram import Update
 from telegram.constants import ChatType
 from telegram.ext import ConversationHandler, CommandHandler, ContextTypes
 
-from src.bot.handlers.cheques.activate import cheque_handler
-from src.bot.handlers.consts.consts import BASE_PARSE_MODE
-from src.bot.handlers.consts.messages import WELCOME_MESSAGE
-from src.bot.handlers.utils.keyboards import entrypoint_keyboard
-from src.config.api import api_config
+from bot.handlers.cheques.activate import cheque_handler
+from bot.handlers.consts.consts import BASE_PARSE_MODE
+from bot.handlers.consts.messages import WELCOME_MESSAGE
+from bot.handlers.utils.keyboards import entrypoint_keyboard
+from config.api import api_config
 
 logger = logging.getLogger(__name__)
 

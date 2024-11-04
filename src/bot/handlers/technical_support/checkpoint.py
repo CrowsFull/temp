@@ -2,12 +2,12 @@ from telegram import Update
 from telegram.constants import ChatType
 from telegram.ext import MessageHandler, filters, ConversationHandler, ContextTypes, CommandHandler
 
-from src.bot.handlers.consts.consts import BASE_PARSE_MODE
-from src.bot.handlers.entrypoint import entrypoint_start_handler
+from bot.handlers.consts.consts import BASE_PARSE_MODE
+from bot.handlers.entrypoint import entrypoint_start_handler
 
-from src.bot.handlers.technical_support.commands import RDP, MAKE_CHECKPOINT_COMMAND
-from src.bot.handlers.utils.keyboards import empty_reply_keyboard, checkpoint_request_keyboard
-from src.config.config import TECHNICAL_COMMAND_THREAD_CHAT_ID, TECHNICAL_COMMAND_CHAT_ID
+from bot.handlers.technical_support.commands import RDP, MAKE_CHECKPOINT_COMMAND
+from bot.handlers.utils.keyboards import empty_reply_keyboard, checkpoint_request_keyboard
+from config.config import TECHNICAL_COMMAND_THREAD_CHAT_ID, TECHNICAL_COMMAND_CHAT_ID
 
 CHOOSE_ACTION = 1
 
@@ -49,7 +49,7 @@ async def make_checkpoint_handler(update: Update, context: ContextTypes.DEFAULT_
 
 
 async def checkpoint_back_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    from src.bot.handlers.technical_support.rdp_request import rdp_request_start_handler
+    from bot.handlers.technical_support.rdp_request import rdp_request_start_handler
 
     await rdp_request_start_handler(update, context)
     return ConversationHandler.END

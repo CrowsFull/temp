@@ -25,7 +25,7 @@ async def send_status_message(bot: Bot, payload: dict) -> bool:
                         result: dict = await response.json()
 
                         payment = result.get("payment")
-                        payment_amount = payment.get("amount")
+                        payment_amount: float = int(payment.get("amount")) / 100
                         transfer_hash = payment.get("transferHash")
 
                         project = result.get("projects")[0]  # todo: check

@@ -6,12 +6,12 @@ from telegram import Update
 from telegram.constants import ChatType
 from telegram.ext import ConversationHandler, CallbackQueryHandler, CommandHandler, ContextTypes
 
-from src.bot.handlers.consts.consts import BASE_PARSE_MODE
-from src.config.api import api_config
+from bot.handlers.consts.consts import BASE_PARSE_MODE
+from config.api import api_config
 
 
 async def activate_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    from src.bot.handlers.entrypoint import entrypoint_start_handler
+    from bot.handlers.entrypoint import entrypoint_start_handler
 
     chat = update.effective_chat
     chat_type = chat.type
@@ -75,7 +75,7 @@ async def activate_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
 
 async def activate_back_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
-    from src.bot.handlers.entrypoint import entrypoint_start_handler
+    from bot.handlers.entrypoint import entrypoint_start_handler
 
     await entrypoint_start_handler(update, context)
     return ConversationHandler.END
