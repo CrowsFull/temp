@@ -8,9 +8,11 @@ RUN apk update && \
     apk add --no-cache \
         build-base \
         linux-headers \
-        librdkafka-dev && \
-    pip install -r requirements.txt
+        librdkafka-dev
 
 RUN ["chmod", "+x", "entrypoint.sh"]
+
+RUN pip install --upgrade pip && \
+    pip install -r requirements.txt \
 
 ENTRYPOINT ["sh", "entrypoint.sh"]
