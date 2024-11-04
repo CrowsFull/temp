@@ -7,8 +7,8 @@ COPY ./entrypoint.sh entrypoint.sh
 RUN apk update && \
     apk add --no-cache \
         build-base \
+        build-essential \
         linux-headers \
-        gcc \
         librdkafka-dev && \
     pip install -r requirements.txt
 
