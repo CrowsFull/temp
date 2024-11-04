@@ -8,7 +8,8 @@ RUN apk update && \
     apk add --no-cache \
         build-base \
         linux-headers \
-        librdkafka-dev
+        librdkafka-dev \
+        librdkafka
 
 RUN ["chmod", "+x", "entrypoint.sh"]
 
