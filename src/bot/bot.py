@@ -1,7 +1,7 @@
 import logging
 
 import pytz
-from telegram.ext import Application, PicklePersistence
+# from telegram.ext import Application, PicklePersistence
 
 from src.bot.handlers.entrypoint import entrypoint_handler
 from src.bot.handlers.registration import registration_handler
