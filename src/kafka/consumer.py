@@ -19,7 +19,7 @@ class KafkaConsumerManager:
         self.consumer_conf: dict = {
             'bootstrap.servers': broker_url,
             'group.id': 'telegram_bot_group',
-            'auto.offset.reset': 'earliest'
+            'auto.offset.reset': 'latest'
         }
 
         self.topics: List[str] = topics
