@@ -6,11 +6,9 @@ from typing import List
 from confluent_kafka import Consumer, KafkaError
 from telegram import Bot
 
-from bot.handlers.consts.consts import BASE_PARSE_MODE
 from config.kafka import kafka_config
 from kafka.enums import KafkaTopic, NotificationType
 from kafka.handlers import send_status_message
-from kafka.utils.enums import Status
 
 
 class KafkaConsumerManager:
