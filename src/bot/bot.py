@@ -3,11 +3,11 @@ import logging
 import pytz
 from telegram.ext import Application, PicklePersistence
 
-from src.bot.handlers.entrypoint import entrypoint_handler
-from src.bot.handlers.registration import registration_handler
-from src.bot.handlers.video_instruction import video_instruction_handler
-from src.bot.jobs.cheques import handle_message_queue
-from src.config.bot import bot_config
+from bot.handlers.entrypoint import entrypoint_handler
+from bot.handlers.registration import registration_handler
+from bot.handlers.video_instruction import video_instruction_handler
+from bot.jobs.cheques import handle_message_queue
+from config.bot import bot_config
 
 logger = logging.getLogger(__name__)
 
