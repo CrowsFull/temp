@@ -13,6 +13,6 @@ RUN apk update && \
 RUN ["chmod", "+x", "entrypoint.sh"]
 
 RUN pip install --upgrade pip && \
-    pip install -r requirements.txt \
+    pip install -r requirements.txt
 
 ENTRYPOINT ["sh", "entrypoint.sh"]
