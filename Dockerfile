@@ -8,6 +8,7 @@ RUN apk update && \
     apk add --no-cache \
         build-base \
         linux-headers \
+        gcc \
         librdkafka-dev && \
     pip install -r requirements.txt
 
