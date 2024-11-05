@@ -55,8 +55,8 @@ class KafkaConsumerManager:
                     tpe = data.get("tpe")
                     payload = data.get("payload")
 
-                    if int(payload["paymentId"]) < 31815:
-                        continue
+                    #if int(payload["paymentId"]) < 31815:
+                    #    continue
 
                     if tpe == NotificationType.PAYMENT_STATUS_CHANGED:
                         await send_status_message(bot, payload)
