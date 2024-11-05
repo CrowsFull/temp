@@ -1,6 +1,8 @@
 import logging
 import uuid
+from http import HTTPStatus
 
+import aiohttp
 from telegram import Update
 from telegram.constants import ChatType
 from telegram.ext import ConversationHandler, CommandHandler, ContextTypes, CallbackQueryHandler, filters, \
@@ -10,9 +12,11 @@ from bot.handlers.consts.consts import BASE_PARSE_MODE
 from bot.handlers.consts.messages import ACTIVATE_MESSAGE, REGISTRATION_MESSAGE, FIRST_MENU_MESSAGE, \
     FIRST_MAIN_MENU_MESSAGE
 from bot.handlers.entrypoint import entrypoint_start_handler
-from bot.handlers.technical_support.base import technical_support_start_handler, technical_support_handler
+from bot.handlers.technical_support.base import technical_support_handler
 from bot.handlers.utils.keyboards import activate_keyboard, first_menu_keyboard, first_menu_reply_keyboard
-from utils.chats import create_group_chat
+from config.api import api_config
+from utils.telegram.chats import create_group_chat, create_invite_link
+from utils.telegram.consts import BASE_CHAT_TITLE, BASE_GROUP_LIST
 
 logger = logging.getLogger(__name__)
 
@@ -25,21 +29,49 @@ MAIN_MENU = 4
 async def registration_start_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat = update.effective_chat
 
-    hash = str(uuid.uuid4())
-    users = [chat.id]
-    bots = [context.bot]
-
-    await create_group_chat(hash, users, bots)
-
     if chat.type == ChatType.PRIVATE:
-        await context.bot.send_message(
-            chat_id=chat.id,
-            text=REGISTRATION_MESSAGE,
-            reply_markup=activate_keyboard,
-            parse_mode=BASE_PARSE_MODE
-        )
+        usernames = BASE_GROUP_LIST
+        usernames.append(chat.username)
 
-    return ACTIVATE_BOT
+        new_chat = await create_group_chat(chat_title=BASE_CHAT_TITLE,
+                                           usernames=usernames)
+
+        invite_link: str = await create_invite_link(new_chat)
+
+        data = {
+            "chatId": new_chat.id,
+            "inviteLink": invite_link
+        }
+
+        project_id = 1
+
+        async with aiohttp.ClientSession() as session:
+            url = f"{api_config.api_url}/export/projects/tgchat/{project_id}"
+
+            async with session.put(url, headers=api_config.api_headers, json=data) as response:
+                if response.status == HTTPStatus.OK:
+                    await context.bot.send_message(
+                        chat_id=chat.id,
+                        text=REGISTRATION_MESSAGE.format(invite_link),
+                        reply_markup=activate_keyboard,
+                        disable_web_page_preview=True,
+                        parse_mode=BASE_PARSE_MODE
+                    )
+
+                    await context.bot.send_message(
+                        chat_id=new_chat.id,
+                        text="Приветик!",
+                        disable_web_page_preview=True,
+                        parse_mode=BASE_PARSE_MODE
+                    )
+                else:
+                    await context.bot.send_message(
+                        chat_id=chat.id,
+                        text="Возникла ошибка при создании чата.",
+                        parse_mode=BASE_PARSE_MODE
+                    )
+
+        return ACTIVATE_BOT
 
 
 async def activate_handler(update: Update, context: ContextTypes.DEFAULT_TYPE):

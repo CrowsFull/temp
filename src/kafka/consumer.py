@@ -16,8 +16,7 @@ class KafkaConsumerManager:
     def __init__(self, broker_url: str, topics: List[str]):
         self.consumer_conf: dict = {
             'bootstrap.servers': broker_url,
-            'group.id': 'telegram_bot_group',
-            'auto.offset.reset': 'latest'
+            'group.id': 'telegram_bot_group'
         }
 
         self.topics: List[str] = topics
