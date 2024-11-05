@@ -27,7 +27,7 @@ class KafkaConsumerManager:
         self.consumer.subscribe(topics)
         logging.info(f"Kafka consumer subscribed on topics {','.join(topics)}.")
 
-        self.timeout = 1.0
+        self.timeout = 0.5
 
     async def handle_kafka_messages(self, bot: Bot):
         while True:
@@ -54,6 +54,9 @@ class KafkaConsumerManager:
 
                     tpe = data.get("tpe")
                     payload = data.get("payload")
+
+                    if int(payload["paymentId"]) < 31816:
+                        continue
 
                     if tpe == NotificationType.PAYMENT_STATUS_CHANGED:
                         await send_status_message(bot, payload)
